@@ -1,9 +1,9 @@
-variable "vpc_id" {
-  default = "vpc-7ab8bf1f"
+variable "vpc" {
+  default = "default"
 }
 
 data "aws_vpc" "vpc" {
-  tags {
-    Name = var.vpc
+  tags = {
+    vpc_id = var.vpc
   }
 }
