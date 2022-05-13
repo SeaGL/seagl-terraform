@@ -8,12 +8,12 @@ resource "random_password" "osem_db_master_pass" {
   }
 }
 
-resource "aws_secretsmanager_secret" "team-city-db-pass" {
+resource "aws_secretsmanager_secret" "osem-db-pass" {
   name = "db-pass-osem"
 }
 
 resource "aws_secretsmanager_secret_version" "osem-db-pass-val" {
-  secret_id     = aws_secretsmanager_secret.team-city-db-pass.id
+  secret_id     = aws_secretsmanager_secret.osem-db-pass.id
   secret_string = random_password.osem_db_master_pass.result
 }
 
