@@ -19,7 +19,8 @@ resource "aws_route53_record" "route_53_root_txt" {
   type    = "TXT"
   ttl     = "300"
   records = [
-    "v=spf1 include:amazonses.com include:_spf.google.com -all"
+    #"v=spf1 include:amazonses.com include:_spf.google.com -all google-site-verification=9Hrl69xXhSeoBOVlnmpOYOSS6fYeiuGehZjHlyPZx3g"
+    "google-site-verification=9Hrl69xXhSeoBOVlnmpOYOSS6fYeiuGehZjHlyPZx3g"
   ]
 }
 
@@ -53,4 +54,8 @@ resource "aws_route53_record" "route_53_dmarc_txt" {
   records = [
     "v=DMARC1;p=quarantine;pct=75;rua=mailto:sre@seagl.org"
   ]
+}
+
+resource "aws_ses_email_identity" "email" {
+  email = "sre@seagl.org"
 }
