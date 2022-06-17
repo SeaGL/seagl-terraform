@@ -24,12 +24,13 @@ resource "aws_db_subnet_group" "osem" {
 }
 
 resource "aws_db_instance" "osem" {
+  identifier              = "osem"
   allocated_storage       = 30
   max_allocated_storage   = 100
   engine                  = "mariadb"
   engine_version          = "10.6.7"
-  instance_class          = "db.m5.large"
-  name                    = "osem"
+  instance_class          = "db.t4g.micro"
+  db_name                 = "osem"
   username                = "osem"
   password                = aws_secretsmanager_secret_version.osem-db-pass-val.secret_string
   parameter_group_name    = "default.mariadb10.6"
