@@ -52,7 +52,7 @@ resource "aws_route53_record" "route_53_dmarc_txt" {
   type    = "TXT"
   ttl     = "300"
   records = [
-    "v=DMARC1;p=quarantine;pct=75;rua=mailto:sre@seagl.org"
+    "v=DMARC1;p=quarantine;pct=75;rua=mailto:dmarc-rpt@seagl.org"
   ]
 }
 
