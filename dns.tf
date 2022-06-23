@@ -56,6 +56,3 @@ resource "aws_route53_record" "route_53_dmarc_txt" {
   ]
 }
 
-resource "aws_ses_email_identity" "email" {
-  email = "sre@seagl.org"
-}
