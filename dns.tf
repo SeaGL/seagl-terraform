@@ -64,9 +64,9 @@ resource "aws_ses_email_identity" "email" {
 resource "aws_route53_record" "alias" {
   zone_id = "Z0173878287JIU5M4KB8R"
   name    = "alias.seagl.org"
-  type    = "A"
+  type    = "CNAME"
   ttl     = "300"
   records = [
-    "35.88.10.210"
+    "dokku.seagl.org"
   ]
 }
