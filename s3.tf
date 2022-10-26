@@ -1,11 +1,17 @@
 resource "aws_s3_bucket" "state" {
   bucket = "seagl-terraform"
 
-}
+  versioning {
+    enabled = true
+  }
 
-resource "aws_s3_bucket_acl" "state" {
-  bucket = aws_s3_bucket.state.id
-  acl    = "private"
+  lifecycle_rule {
+    enabled = true
+
+    noncurrent_version_expiration {
+      days = 120
+    }
+  }
 }
 
 resource "aws_s3_bucket_versioning" "state" {
