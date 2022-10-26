@@ -70,3 +70,23 @@ resource "aws_route53_record" "alias" {
     "dokku.seagl.org"
   ]
 }
+
+resource "aws_route53_record" "matrix-2022" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "matrix.2022.seagl.org"
+  type    = "A"
+  ttl     = "300"
+  records = [
+    "140.211.166.230"
+  ]
+}
+
+resource "aws_route53_record" "stats-2022" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "stats.2022.seagl.org"
+  type    = "A"
+  ttl     = "300"
+  records = [
+    "140.211.166.230"
+  ]
+}
