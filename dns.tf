@@ -90,3 +90,13 @@ resource "aws_route53_record" "stats-2022" {
     "140.211.166.230"
   ]
 }
+
+resource "aws_route53_record" "osem-static" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "osem-static.seagl.org"
+  type    = "CNAME"
+  ttl     = "300"
+  records = [
+    "seagl.github.io."
+  ]
+}
