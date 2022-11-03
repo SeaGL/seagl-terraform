@@ -100,3 +100,13 @@ resource "aws_route53_record" "osem-static" {
     "seagl.github.io."
   ]
 }
+
+resource "aws_route53_record" "osem-static" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "meet-test.seagl.org"
+  type    = "A"
+  ttl     = "300"
+  records = [
+    "192.241.213.157"
+  ]
+}
