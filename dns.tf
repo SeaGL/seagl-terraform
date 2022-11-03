@@ -101,9 +101,9 @@ resource "aws_route53_record" "osem-static" {
   ]
 }
 
-resource "aws_route53_record" "meet-test" {
+resource "aws_route53_record" "meet-do-test" {
   zone_id = "Z0173878287JIU5M4KB8R"
-  name    = "meet-test.seagl.org"
+  name    = "meet-do-test.seagl.org"
   type    = "A"
   ttl     = "300"
   records = [
