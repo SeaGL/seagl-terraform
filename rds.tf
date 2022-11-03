@@ -28,7 +28,7 @@ resource "aws_db_instance" "osem" {
   allocated_storage       = 30
   max_allocated_storage   = 100
   engine                  = "mariadb"
-  engine_version          = "10.6.8"
+  engine_version          = "10.6.10"
   instance_class          = "db.t4g.micro"
   name                    = "osem"
   username                = "osem"
