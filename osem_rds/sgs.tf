@@ -5,7 +5,7 @@
 resource "aws_security_group" "osem_rds_security_group" {
   name        = "osem-private-sg"
   description = "Private SG for OSEM RDS"
-  vpc_id      = data.aws_vpc.vpc.id
+  vpc_id      = var.vpc_id
 
   tags = {
     Name      = "osem--private-sg"
@@ -29,7 +29,7 @@ resource "aws_security_group_rule" "private_in" {
   from_port   = 3306
   to_port     = 3306
   protocol    = "-1"
-  cidr_blocks = [data.aws_vpc.vpc.cidr_block]
+  cidr_blocks = [var.vpc_cidr]
 
   security_group_id = aws_security_group.osem_rds_security_group.id
 
