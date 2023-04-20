@@ -19,7 +19,7 @@ resource "aws_route53_record" "route_53_root_txt" {
   type    = "TXT"
   ttl     = "300"
   records = [
-    #"v=spf1 include:amazonses.com include:_spf.google.com -all google-site-verification=9Hrl69xXhSeoBOVlnmpOYOSS6fYeiuGehZjHlyPZx3g"
+    "v=spf1 include:_spf.google.com include:amazonses.com ~all",
     "google-site-verification=9Hrl69xXhSeoBOVlnmpOYOSS6fYeiuGehZjHlyPZx3g"
   ]
 }
