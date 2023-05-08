@@ -61,3 +61,13 @@ resource "aws_route53_record" "alias" {
     "dokku.seagl.org"
   ]
 }
+
+resource "aws_route53_record" "status" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "status.seagl.org"
+  type    = "CNAME"
+  ttl     = "300"
+  records = [
+    "dokku.seagl.org"
+  ]
+}
