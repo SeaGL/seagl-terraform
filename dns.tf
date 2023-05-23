@@ -61,3 +61,23 @@ resource "aws_route53_record" "alias" {
     "dokku.seagl.org"
   ]
 }
+
+resource "aws_route53_record" "cloud-a" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "cloud.seagl.org"
+  type    = "A"
+  ttl     = "300"
+  records = [
+    "140.211.9.53"
+  ]
+}
+
+resource "aws_route53_record" "cloud-aaaa" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "cloud.seagl.org"
+  type    = "AAAA"
+  ttl     = "300"
+  records = [
+    "2605:bc80:3010:104::8cd3:935"
+  ]
+}
