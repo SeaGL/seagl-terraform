@@ -88,6 +88,6 @@ resource "aws_route53_record" "mailu-test-a" {
   type    = "A"
   ttl     = "300"
   records = [
-    "140.211.166.238"
+    "140.211.167.146"
   ]
 }
