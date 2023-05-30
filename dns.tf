@@ -143,3 +143,36 @@ resource "aws_route53_record" "mailu-test-autoconfig-cname" {
     "mail.mail-test.seagl.org."
   ]
 }
+
+resource "aws_route53_record" "mailu-test-dkim" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "dkim._domainkey.mail-test.seagl.org"
+  type    = "TXT"
+  ttl     = "300"
+  records = [
+    "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1Jw/diiAFRmarcHsr/KkGvfr22CVA5xTJTWRInvKi2My7PbWjhLSGNx7XcJw1DCcfOGb1cdArjNmYDmmG6VRRTQjCr2RWBSihIRLodnc+KPeS2Xnipi0JdNg7CTCNVQfA+znlKoWqalTT0nKrlDf87vhLmltU4wOYnrmvtZvtHkdwd9GA7hxMdHu4LnW",
+    "X2VK0itMcPCBqIUvyOSIHJ8c7i8VPmcV+G6VDquepNsmFN0zcvNXAosqaWOHCnzCGzvQiwm6Lbq4vMxUsU6BLUv1JiPq3zXtqQ4tp6VynpLIy5VaF4XI5fyibsKTPuzI0d58tuiCrgCCMy5T9BmkCnQAzQIDAQAB"
+  ]
+}
+
+resource "aws_route53_record" "mailu-test-dmarc" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "_dmarc.mail-test.seagl.org"
+  type    = "TXT"
+  ttl     = "300"
+  records = [
+    # TODO this email doesn't seem to be created automatically
+    "v=DMARC1; p=reject; rua=mailto:dmarc@mail-test.seagl.org; ruf=mailto:dmarc@mail-test.seagl.org; adkim=s; aspf=s"
+  ]
+}
+
+
+resource "aws_route53_record" "mailu-test-dmarc-report" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "mail-test.seagl.org._report._dmarc.mail-test.seagl.org"
+  type    = "TXT"
+  ttl     = "300"
+  records = [
+    "v=DMARC1"
+  ]
+}
