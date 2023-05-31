@@ -95,7 +95,7 @@ resource "aws_route53_record" "mailu-test-a" {
 
 resource "aws_route53_record" "mailu-test-mx" {
   zone_id = "Z0173878287JIU5M4KB8R"
-  name    = "mail.mail-test.seagl.org"
+  name    = "mail-test.seagl.org"
   type    = "MX"
   ttl     = "300"
   records = [
@@ -105,7 +105,7 @@ resource "aws_route53_record" "mailu-test-mx" {
 
 resource "aws_route53_record" "mailu-test-spf" {
   zone_id = "Z0173878287JIU5M4KB8R"
-  name    = "mail.mail-test.seagl.org"
+  name    = "mail-test.seagl.org"
   type    = "TXT"
   ttl     = "300"
   records = [
