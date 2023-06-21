@@ -165,14 +165,3 @@ resource "aws_route53_record" "mailu-test-dmarc" {
     "v=DMARC1; p=reject; rua=mailto:dmarc@mail-test.seagl.org; ruf=mailto:dmarc@mail-test.seagl.org; adkim=s; aspf=s"
   ]
 }
-
-
-resource "aws_route53_record" "mailu-test-dmarc-report" {
-  zone_id = "Z0173878287JIU5M4KB8R"
-  name    = "mail-test.seagl.org._report._dmarc.mail-test.seagl.org"
-  type    = "TXT"
-  ttl     = "300"
-  records = [
-    "v=DMARC1"
-  ]
-}
