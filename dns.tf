@@ -86,8 +86,81 @@ resource "aws_route53_record" "mailu-test-a" {
   zone_id = "Z0173878287JIU5M4KB8R"
   name    = "mail.mail-test.seagl.org"
   type    = "A"
-  ttl     = "300"
+  # TODO increase all these Mailu TTLs
+  ttl = "300"
   records = [
     "140.211.167.146"
+  ]
+}
+
+resource "aws_route53_record" "mailu-test-mx" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "mail-test.seagl.org"
+  type    = "MX"
+  ttl     = "300"
+  records = [
+    "10 mail.mail-test.seagl.org."
+  ]
+}
+
+resource "aws_route53_record" "mailu-test-spf" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "mail-test.seagl.org"
+  type    = "TXT"
+  ttl     = "300"
+  records = [
+    # This diverges from Mailu's rec: they wanted to include a:mail.mail-test.seagl.org too
+    "v=spf1 mx ~all"
+  ]
+}
+
+resource "aws_route53_record" "mailu-test-autoconfig-srv" {
+  # grep SRV | sed -e 's/ 600 IN SRV /": "/' -e 's/^/"/' -e 's/$/",/' -e 's/ mail.mail-test.seagl.org.//' -e 's/.mail-test.seagl.org.//'
+  for_each = {
+    "_imap._tcp" : "20 1 143",
+    "_pop3._tcp" : "20 1 110",
+    "_submission._tcp" : "20 1 587",
+    "_autodiscover._tcp" : "10 1 443",
+    "_submissions._tcp" : "10 1 465",
+    "_imaps._tcp" : "10 1 993",
+    "_pop3s._tcp" : "10 1 995"
+  }
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "${each.key}.mail-test.seagl.org"
+  type    = "SRV"
+  ttl     = "300"
+  records = [
+    "${each.value} mail.mail-test.seagl.org."
+  ]
+}
+
+resource "aws_route53_record" "mailu-test-autoconfig-cname" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "autoconfig.mail-test.seagl.org"
+  type    = "CNAME"
+  ttl     = "300"
+  records = [
+    "mail.mail-test.seagl.org."
+  ]
+}
+
+resource "aws_route53_record" "mailu-test-dkim" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "dkim._domainkey.mail-test.seagl.org"
+  type    = "TXT"
+  ttl     = "300"
+  records = [
+    "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1Jw/diiAFRmarcHsr/KkGvfr22CVA5xTJTWRInvKi2My7PbWjhLSGNx7XcJw1DCcfOGb1cdArjNmYDmmG6VRRTQjCr2RWBSihIRLodnc+KPeS2Xnipi0JdNg7CTCNVQfA+znlKoWqalTT0nKrlDf87vhLmltU4wOYnrmvtZvtHkdwd9GA7hxMdHu4LnW\"\"X2VK0itMcPCBqIUvyOSIHJ8c7i8VPmcV+G6VDquepNsmFN0zcvNXAosqaWOHCnzCGzvQiwm6Lbq4vMxUsU6BLUv1JiPq3zXtqQ4tp6VynpLIy5VaF4XI5fyibsKTPuzI0d58tuiCrgCCMy5T9BmkCnQAzQIDAQAB"
+  ]
+}
+
+resource "aws_route53_record" "mailu-test-dmarc" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "_dmarc.mail-test.seagl.org"
+  type    = "TXT"
+  ttl     = "300"
+  records = [
+    # TODO this email doesn't seem to be created automatically
+    "v=DMARC1; p=reject; rua=mailto:dmarc@mail-test.seagl.org; ruf=mailto:dmarc@mail-test.seagl.org; adkim=s; aspf=s"
   ]
 }
