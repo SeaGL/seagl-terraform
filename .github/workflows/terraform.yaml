@@ -22,6 +22,8 @@ jobs:
         TF_ACTION_WORKING_DIR: 'terraform'
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        OS_USERNAME:  ${{ secrets.OS_USERNAME }}
+        OS_PASSWORD:  ${{ secrets.OS_PASSWORD }}
 
     - name: Terraform Init
       id: init
@@ -31,6 +33,8 @@ jobs:
         TF_ACTION_WORKING_DIR: 'terraform'
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        OS_USERNAME:  ${{ secrets.OS_USERNAME }}
+        OS_PASSWORD:  ${{ secrets.OS_PASSWORD }}
 
     - name: Terraform Validate
       id: validate
@@ -40,6 +44,8 @@ jobs:
         TF_ACTION_WORKING_DIR: 'terraform'
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        OS_USERNAME:  ${{ secrets.OS_USERNAME }}
+        OS_PASSWORD:  ${{ secrets.OS_PASSWORD }}
 
     - name: Terraform Plan
       id: plan
@@ -51,6 +57,8 @@ jobs:
         TF_ACTION_WORKING_DIR: 'terraform'
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        OS_USERNAME:  ${{ secrets.OS_USERNAME }}
+        OS_PASSWORD:  ${{ secrets.OS_PASSWORD }}
 
     - name: Update Pull Request
       uses: actions/github-script@v6
@@ -90,3 +98,5 @@ jobs:
         TF_ACTION_WORKING_DIR: 'terraform'
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        OS_USERNAME:  ${{ secrets.OS_USERNAME }}
+        OS_PASSWORD:  ${{ secrets.OS_PASSWORD }}
