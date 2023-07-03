@@ -10,7 +10,7 @@ resource "aws_route53_record" "route_53_root_txt" {
   type    = "TXT"
   ttl     = "300"
   records = [
-    "v=spf1 include:_spf.google.com include:amazonses.com ~all",
+    "v=spf1 include:_spf.google.com include:amazonses.com include:40081384.spf02.hubspotemail.net ~all",
     "google-site-verification=9Hrl69xXhSeoBOVlnmpOYOSS6fYeiuGehZjHlyPZx3g"
   ]
 }
@@ -33,6 +33,20 @@ resource "aws_route53_record" "email_dkim_records" {
   ttl     = "300"
   records = [
     "${element(aws_ses_domain_dkim.email_dkim.dkim_tokens, count.index)}.dkim.amazonses.com",
+  ]
+}
+
+resource "aws_route53_record" "email_dkim_hubspot_records" {
+  for_each = {
+    "hs1-40081384" : "seagl-org.hs12a.dkim.hubspotemail.net",
+    "hs2-40081384" : "seagl-org.hs12b.dkim.hubspotemail.net"
+  }
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "${each.key}._domainkey.${var.email_domain_name}"
+  type    = "CNAME"
+  ttl     = "300"
+  records = [
+    each.value
   ]
 }
 
