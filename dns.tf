@@ -10,7 +10,7 @@ resource "aws_route53_record" "route_53_root_txt" {
   type    = "TXT"
   ttl     = "300"
   records = [
-    "v=spf1 include:_spf.google.com include:amazonses.com include:40081384.spf02.hubspotemail.net ~all",
+    "v=spf1 include:_spf.google.com include:amazonses.com include:40081384.spf02.hubspotemail.net include:_spf.osuosl.org ~all",
     "google-site-verification=9Hrl69xXhSeoBOVlnmpOYOSS6fYeiuGehZjHlyPZx3g"
   ]
 }
