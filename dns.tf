@@ -189,3 +189,29 @@ resource "aws_route53_record" "mailu-test-dmarc" {
     "v=DMARC1; p=reject; rua=mailto:dmarc@mail-test.seagl.org; ruf=mailto:dmarc@mail-test.seagl.org; adkim=s; aspf=s"
   ]
 }
+
+# 2023 ephemeral Matrix homeserver
+
+locals {
+  matrix_2023_server_ip = "140.211.167.238"
+}
+
+resource "aws_route53_record" "matrix-2023-ephemeral-a" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "matrix.2023.seagl.org"
+  type    = "A"
+  ttl     = "300"
+  records = [
+    local.matrix_2023_server_ip
+  ]
+}
+
+resource "aws_route53_record" "matrix-2023-ephemeral-delegation-a" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "2023.seagl.org"
+  type    = "A"
+  ttl     = "300"
+  records = [
+    local.matrix_2023_server_ip
+  ]
+}
