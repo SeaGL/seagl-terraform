@@ -210,8 +210,8 @@ resource "aws_route53_record" "matrix-2023-ephemeral-delegation-a" {
   zone_id = "Z0173878287JIU5M4KB8R"
   name    = "2023.seagl.org"
   type    = "A"
-  ttl     = "300"
-  records = [
-    local.matrix_2023_server_ip
-  ]
+  alias {
+    name                   = "d34bgs5yccfcw9.cloudfront.net"
+    zone_id                = "Z2FDTNDATAQYW2"
+  }
 }
