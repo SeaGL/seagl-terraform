@@ -213,5 +213,6 @@ resource "aws_route53_record" "matrix-2023-ephemeral-delegation-a" {
   alias {
     name                   = "d34bgs5yccfcw9.cloudfront.net"
     zone_id                = "Z2FDTNDATAQYW2"
+    evaluate_target_health = false
   }
 }
