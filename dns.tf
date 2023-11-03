@@ -216,3 +216,13 @@ resource "aws_route53_record" "matrix-2023-ephemeral-delegation-a" {
     evaluate_target_health = false
   }
 }
+
+resource "aws_route53_record" "jitsi-2023" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "meet.seagl.org"
+  type    = "A"
+  ttl     = "300"
+  records = [
+    "146.190.2.208"
+  ]
+}
