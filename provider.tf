@@ -28,7 +28,7 @@ provider "tls" {
 }
 
 provider "openstack" {
-  auth_url          = "https://oprod-controller1.osuosl.org:5000/v3"
+  auth_url          = "https://openstack.osuosl.org:5000/v3"
   region            = "RegionOne"
   tenant_id         = "03cbb624d5be494d95af475e74fcb47b"
   tenant_name       = "SeaGL"
