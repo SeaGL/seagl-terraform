@@ -189,3 +189,13 @@ resource "aws_route53_record" "mailu-test-dmarc" {
     "v=DMARC1; p=reject; rua=mailto:dmarc@mail-test.seagl.org; ruf=mailto:dmarc@mail-test.seagl.org; adkim=s; aspf=s"
   ]
 }
+
+resource "aws_route53_record" "pretalx" {
+  zone_id = "Z0173878287JIU5M4KB8R"
+  name    = "pretalx.seagl.org"
+  type    = "CNAME"
+  ttl     = "300"
+  records = [
+    "dokku.seagl.org"
+  ]
+}
