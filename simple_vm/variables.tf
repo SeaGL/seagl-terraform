@@ -22,3 +22,11 @@ variable "disk_size" {
   description = "Size of the VM's root volume"
   type        = number
 }
+
+variable "dns_zone" {
+  description = "Route 53 zone object to provision records in"
+  type = object({
+    zone_id = string
+    name    = string
+  })
+}

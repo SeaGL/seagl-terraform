@@ -5,4 +5,9 @@ module "nc-office-vm" {
   instance_type = "m1.small"
   network       = "general_servers2"
   disk_size     = 15
+  # TODO replace this with a real Route 53 zone object when we control that in Terraform
+  dns_zone = {
+    zone_id = "Z0173878287JIU5M4KB8R"
+    name    = "seagl.org"
+  }
 }

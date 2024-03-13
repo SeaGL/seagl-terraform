@@ -54,3 +54,13 @@ resource "openstack_compute_instance_v2" "instance" {
     name = var.network
   }
 }
+
+resource "aws_route53_record" "dns-a" {
+  zone_id = var.dns_zone.zone_id
+  name    = "${var.name}.host.${var.dns_zone.name}"
+  type    = "A"
+  ttl     = "300"
+  records = [
+    openstack_compute_instance_v2.instance.access_ip_v4
+  ]
+}
