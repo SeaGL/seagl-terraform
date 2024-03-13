@@ -1,5 +1,6 @@
 resource "openstack_networking_secgroup_v2" "main-sg" {
-  name = var.name
+  name                 = var.name
+  delete_default_rules = true
 }
 
 resource "openstack_networking_secgroup_rule_v2" "ipv4-egress" {
