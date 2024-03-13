@@ -16,6 +16,5 @@ resource "openstack_compute_instance_v2" "mailu" {
 
   network {
     name        = "general_servers2"
-    fixed_ip_v4 = "140.211.167.146" # TODO can we/should we import this...?
   }
 }
