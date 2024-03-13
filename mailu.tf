@@ -1,9 +1,44 @@
+resource "openstack_networking_secgroup_v2" "mailu" {
+  name = "mailu"
+}
+
+resource "openstack_networking_secgroup_rule_v2" "mailu-ipv4-egress" {
+  direction         = "egress"
+  ethertype         = "IPv4"
+  security_group_id = openstack_networking_secgroup_v2.mailu.id
+}
+
+resource "openstack_networking_secgroup_rule_v2" "mailu-ipv6-egress" {
+  direction         = "egress"
+  ethertype         = "IPv6"
+  security_group_id = openstack_networking_secgroup_v2.mailu.id
+}
+
+resource "openstack_networking_secgroup_rule_v2" "mailu-icmp4-ingress" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "icmp"
+  remote_ip_prefix  = "0.0.0.0/0"
+  security_group_id = openstack_networking_secgroup_v2.mailu.id
+}
+
+resource "openstack_networking_secgroup_rule_v2" "mailu-tcp4-ingress" {
+  for_each          = toset(["22", "25", "80", "110", "143", "443", "465", "587", "993", "995"])
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "tcp"
+  port_range_min    = each.value
+  port_range_max    = each.value
+  remote_ip_prefix  = "0.0.0.0/0"
+  security_group_id = openstack_networking_secgroup_v2.mailu.id
+}
+
 resource "openstack_compute_instance_v2" "mailu" {
   name        = "mailu"
   flavor_name = "m1.medium"
   key_pair    = "AJ OpenStack bootstrap" # TODO lol
   security_groups = [
-    "mailu" # TODO import this
+    openstack_networking_secgroup_v2.mailu.name
   ]
 
   block_device {
@@ -15,6 +50,6 @@ resource "openstack_compute_instance_v2" "mailu" {
   }
 
   network {
-    name        = "general_servers2"
+    name = "general_servers2"
   }
 }
