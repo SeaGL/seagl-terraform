@@ -37,3 +37,33 @@ moved {
   to   = module.prod_db.aws_db_instance.osem
   from = aws_db_instance.osem
 }
+
+moved {
+  from = openstack_networking_secgroup_v2.mailu
+  to   = module.mailu-vm.openstack_networking_secgroup_v2.main-sg
+}
+
+moved {
+  from = openstack_networking_secgroup_rule_v2.mailu-ipv4-egress
+  to   = module.mailu-vm.openstack_networking_secgroup_rule_v2.ipv4-egress
+}
+
+moved {
+  from = openstack_networking_secgroup_rule_v2.mailu-ipv6-egress
+  to   = module.mailu-vm.openstack_networking_secgroup_rule_v2.ipv6-egress
+}
+
+moved {
+  from = openstack_networking_secgroup_rule_v2.mailu-icmp4-ingress
+  to   = module.mailu-vm.openstack_networking_secgroup_rule_v2.icmp4-ingress
+}
+
+moved {
+  from = openstack_networking_secgroup_rule_v2.mailu-tcp4-ingress
+  to   = module.mailu-vm.openstack_networking_secgroup_rule_v2.tcp4-ingress
+}
+
+moved {
+  from = openstack_compute_instance_v2.mailu
+  to   = module.mailu-vm.openstack_compute_instance_v2.instance
+}
