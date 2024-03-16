@@ -5,9 +5,5 @@ module "mailu-vm" {
   instance_type = "m1.medium"
   network       = "general_servers2"
   disk_size     = 30
-  # TODO replace this with a real Route 53 zone object when we control that in Terraform
-  dns_zone = {
-    zone_id = "Z0173878287JIU5M4KB8R"
-    name    = "seagl.org"
-  }
+  dns_zone = aws_route53_zone.apex
 }

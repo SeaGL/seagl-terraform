@@ -1,11 +1,18 @@
+# TODO create NS and SOA records
+
+resource "aws_route53_zone" "apex" {
+  # TODO remove this: it's just to ensure a clean import `plan`
+  comment           = ""
+  name              = "seagl.org"
+}
+
 resource "aws_ses_domain_identity" "seagl" {
   domain = "seagl.org"
 }
 
 # SPF
 resource "aws_route53_record" "route_53_root_txt" {
-  # this Zone needs to be imported still
-  zone_id = "Z0173878287JIU5M4KB8R"
+  zone_id = aws_route53_zone.apex.id
   name    = ""
   type    = "TXT"
   ttl     = "300"
@@ -16,8 +23,7 @@ resource "aws_route53_record" "route_53_root_txt" {
 }
 
 resource "aws_route53_record" "route_53_cloud_txt" {
-  # this Zone needs to be imported still
-  zone_id = "Z0173878287JIU5M4KB8R"
+  zone_id = aws_route53_zone.apex.id
   name    = "cloud.seagl.org"
   type    = "TXT"
   ttl     = "300"
@@ -37,8 +43,7 @@ resource "aws_ses_domain_dkim" "email_dkim" {
 
 resource "aws_route53_record" "email_dkim_records" {
   count = 3
-  # this Zone needs to be imported still
-  zone_id = "Z0173878287JIU5M4KB8R"
+  zone_id = aws_route53_zone.apex.id
   name    = "${element(aws_ses_domain_dkim.email_dkim.dkim_tokens, count.index)}._domainkey.${var.email_domain_name}"
   type    = "CNAME"
   ttl     = "300"
@@ -52,7 +57,7 @@ resource "aws_route53_record" "email_dkim_hubspot_records" {
     "hs1-40081384" : "seagl-org.hs12a.dkim.hubspotemail.net",
     "hs2-40081384" : "seagl-org.hs12b.dkim.hubspotemail.net"
   }
-  zone_id = "Z0173878287JIU5M4KB8R"
+  zone_id = aws_route53_zone.apex.id
   name    = "${each.key}._domainkey.${var.email_domain_name}"
   type    = "CNAME"
   ttl     = "300"
@@ -62,8 +67,7 @@ resource "aws_route53_record" "email_dkim_hubspot_records" {
 }
 
 resource "aws_route53_record" "route_53_dmarc_txt" {
-  # this Zone needs to be imported still
-  zone_id = "Z0173878287JIU5M4KB8R"
+  zone_id = aws_route53_zone.apex.id
   name    = "_dmarc.${var.email_domain_name}"
   type    = "TXT"
   ttl     = "300"
@@ -78,7 +82,7 @@ resource "aws_ses_email_identity" "email" {
 
 # setup alias for Matrix room aliasing
 resource "aws_route53_record" "alias" {
-  zone_id = "Z0173878287JIU5M4KB8R"
+  zone_id = aws_route53_zone.apex.id
   name    = "alias.seagl.org"
   type    = "CNAME"
   ttl     = "300"
@@ -88,7 +92,7 @@ resource "aws_route53_record" "alias" {
 }
 
 resource "aws_route53_record" "cloud-a" {
-  zone_id = "Z0173878287JIU5M4KB8R"
+  zone_id = aws_route53_zone.apex.id
   name    = "cloud.seagl.org"
   type    = "A"
   ttl     = "300"
@@ -98,7 +102,7 @@ resource "aws_route53_record" "cloud-a" {
 }
 
 resource "aws_route53_record" "cloud-aaaa" {
-  zone_id = "Z0173878287JIU5M4KB8R"
+  zone_id = aws_route53_zone.apex.id
   name    = "cloud.seagl.org"
   type    = "AAAA"
   ttl     = "300"
@@ -108,7 +112,7 @@ resource "aws_route53_record" "cloud-aaaa" {
 }
 
 resource "aws_route53_record" "mailu-test-a" {
-  zone_id = "Z0173878287JIU5M4KB8R"
+  zone_id = aws_route53_zone.apex.id
   name    = "mail.mail-test.seagl.org"
   type    = "A"
   # TODO increase all these Mailu TTLs
@@ -119,7 +123,7 @@ resource "aws_route53_record" "mailu-test-a" {
 }
 
 resource "aws_route53_record" "mailu-test-mx" {
-  zone_id = "Z0173878287JIU5M4KB8R"
+  zone_id = aws_route53_zone.apex.id
   name    = "mail-test.seagl.org"
   type    = "MX"
   ttl     = "300"
@@ -129,7 +133,7 @@ resource "aws_route53_record" "mailu-test-mx" {
 }
 
 resource "aws_route53_record" "mailu-test-spf" {
-  zone_id = "Z0173878287JIU5M4KB8R"
+  zone_id = aws_route53_zone.apex.id
   name    = "mail-test.seagl.org"
   type    = "TXT"
   ttl     = "300"
@@ -150,7 +154,7 @@ resource "aws_route53_record" "mailu-test-autoconfig-srv" {
     "_imaps._tcp" : "10 1 993",
     "_pop3s._tcp" : "10 1 995"
   }
-  zone_id = "Z0173878287JIU5M4KB8R"
+  zone_id = aws_route53_zone.apex.id
   name    = "${each.key}.mail-test.seagl.org"
   type    = "SRV"
   ttl     = "300"
@@ -160,7 +164,7 @@ resource "aws_route53_record" "mailu-test-autoconfig-srv" {
 }
 
 resource "aws_route53_record" "mailu-test-autoconfig-cname" {
-  zone_id = "Z0173878287JIU5M4KB8R"
+  zone_id = aws_route53_zone.apex.id
   name    = "autoconfig.mail-test.seagl.org"
   type    = "CNAME"
   ttl     = "300"
@@ -170,7 +174,7 @@ resource "aws_route53_record" "mailu-test-autoconfig-cname" {
 }
 
 resource "aws_route53_record" "mailu-test-dkim" {
-  zone_id = "Z0173878287JIU5M4KB8R"
+  zone_id = aws_route53_zone.apex.id
   name    = "dkim._domainkey.mail-test.seagl.org"
   type    = "TXT"
   ttl     = "300"
@@ -180,7 +184,7 @@ resource "aws_route53_record" "mailu-test-dkim" {
 }
 
 resource "aws_route53_record" "mailu-test-dmarc" {
-  zone_id = "Z0173878287JIU5M4KB8R"
+  zone_id = aws_route53_zone.apex.id
   name    = "_dmarc.mail-test.seagl.org"
   type    = "TXT"
   ttl     = "300"
@@ -191,7 +195,7 @@ resource "aws_route53_record" "mailu-test-dmarc" {
 }
 
 resource "aws_route53_record" "pretalx" {
-  zone_id = "Z0173878287JIU5M4KB8R"
+  zone_id = aws_route53_zone.apex.id
   name    = "pretalx.seagl.org"
   type    = "CNAME"
   ttl     = "300"
