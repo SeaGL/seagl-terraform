@@ -80,10 +80,9 @@ resource "aws_ses_email_identity" "email" {
   email = "sre@seagl.org"
 }
 
-# setup alias for Matrix room aliasing
-resource "aws_route53_record" "alias" {
+resource "aws_route53_record" "dokku_wildcard" {
   zone_id = aws_route53_zone.apex.id
-  name    = "alias.seagl.org"
+  name    = "*.seagl.org"
   type    = "CNAME"
   ttl     = "300"
   records = [
@@ -191,15 +190,5 @@ resource "aws_route53_record" "mailu-test-dmarc" {
   records = [
     # TODO this email doesn't seem to be created automatically
     "v=DMARC1; p=reject; rua=mailto:dmarc@mail-test.seagl.org; ruf=mailto:dmarc@mail-test.seagl.org; adkim=s; aspf=s"
-  ]
-}
-
-resource "aws_route53_record" "pretalx" {
-  zone_id = aws_route53_zone.apex.id
-  name    = "pretalx.seagl.org"
-  type    = "CNAME"
-  ttl     = "300"
-  records = [
-    "dokku.seagl.org"
   ]
 }
