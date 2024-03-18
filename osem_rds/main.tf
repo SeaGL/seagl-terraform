@@ -39,4 +39,5 @@ resource "aws_db_instance" "osem" {
   storage_encrypted       = true
   vpc_security_group_ids  = [aws_security_group.osem_rds_security_group.id]
   backup_retention_period = 7
+  ca_cert_identifier      = "rds-ca-2019"
 }
