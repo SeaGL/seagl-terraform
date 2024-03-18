@@ -1,5 +1,5 @@
 module "nc-office-vm" {
-  source        = "./simple_vm"
+  source        = "../simple_vm"
   name          = "nc-office"
   ports         = [22, 80, 443]
   instance_type = "m1.small"
