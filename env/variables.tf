@@ -3,7 +3,7 @@ variable "zone_name" {
   type        = string
 }
 
-variable "dns_zone" {
+variable "attach_to_zone" {
   description = "Route 53 zone object to attach (via NS record) the environment's zone to"
   default     = null
   type = object({
