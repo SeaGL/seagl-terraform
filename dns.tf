@@ -1,8 +1,6 @@
 # TODO create NS and SOA records
 
 resource "aws_route53_zone" "apex" {
-  # TODO remove this: it's just to ensure a clean import `plan`
-  comment           = ""
   name              = "seagl.org"
 }
 
