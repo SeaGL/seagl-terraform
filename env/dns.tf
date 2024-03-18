@@ -4,6 +4,15 @@ resource "aws_route53_zone" "apex" {
   name = var.zone_name
 }
 
+resource "aws_route53_record" "delegation-ns" {
+  count   = var.attach_to_zone != null ? 1 : 0
+  zone_id = var.attach_to_zone.zone_id
+  name    = aws_route53_zone.apex.name
+  type    = "NS"
+  ttl     = "300"
+  records = aws_route53_zone.apex.name_servers
+}
+
 resource "aws_ses_domain_identity" "main" {
   domain = var.zone_name
 }
