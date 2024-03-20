@@ -22,7 +22,7 @@ resource "aws_route53_record" "email_dkim_hubspot_records" {
   ]
 }
 
-# TODO remove this; we should (do?) do DNS-based verification instead.
+# TODO remove this; we do DKIM-based verification instead.
 resource "aws_ses_domain_identity" "email_domain_identity" {
   domain = var.email_domain_name
 }
