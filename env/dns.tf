@@ -1,4 +1,5 @@
-# TODO create NS and SOA records
+# Note: we intentionally do not create NS and SOA records and just let Route 53 create them automatically.
+# This is Probably Fine(tm) because these records are basically never updated.
 
 resource "aws_route53_zone" "apex" {
   name = var.zone_name
