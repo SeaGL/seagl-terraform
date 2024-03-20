@@ -22,17 +22,6 @@ resource "aws_route53_record" "email_dkim_hubspot_records" {
   ]
 }
 
-# TODO remove this; we do DKIM-based verification instead.
-resource "aws_ses_domain_identity" "email_domain_identity" {
-  domain = var.email_domain_name
-}
-
-# TODO remove this. It's unnecessary because the domain is verified.
-# It's still here only to make a refactoring `plan` clean.
-resource "aws_ses_email_identity" "email" {
-  email = "sre@seagl.org"
-}
-
 resource "aws_route53_record" "cloud-a" {
   zone_id = module.production_env.zone_id
   name    = "cloud.seagl.org"
