@@ -30,6 +30,7 @@ resource "aws_route53_record" "route_53_root_txt" {
 }
 
 # DKIM
+# TODO DKIM verification seems to need to be manually initiated in the console
 resource "aws_ses_domain_dkim" "email_dkim" {
   domain = aws_ses_domain_identity.main.domain
 }
