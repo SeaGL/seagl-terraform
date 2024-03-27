@@ -36,7 +36,7 @@ resource "aws_route53_record" "cloud-aaaa" {
   zone_id = module.production_env.zone_id
   name    = "cloud.seagl.org"
   type    = "AAAA"
-  ttl     = "300"
+  ttl     = "600"
   records = [
     "2605:bc80:3010:104::8cd3:935"
   ]
