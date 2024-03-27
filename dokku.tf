@@ -2,7 +2,7 @@ resource "aws_instance" "dokku" {
   ami           = "ami-036d46416a34a611c"
   instance_type = "t3.small"
 
-  associate_public_ip_address = true
+  associate_public_ip_address = false
   key_name                    = "AJ bootstrap key" # TODO
 
   vpc_security_group_ids = ["sg-0e719b49f7d4d7f08"]
