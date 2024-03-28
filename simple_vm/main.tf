@@ -62,6 +62,7 @@ resource "openstack_compute_instance_v2" "instance" {
     #cloud-config
     ssh_pwauth: false
     users:
+    # As in seagl-ansible/roles/users/tasks/main.yml
     - name: "gh-actions"
       gecos: "Privileged User"
       sudo: "ALL=(ALL) NOPASSWD:ALL"
