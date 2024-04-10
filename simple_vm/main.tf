@@ -53,6 +53,26 @@ resource "openstack_compute_instance_v2" "instance" {
   network {
     name = var.network
   }
+
+  lifecycle {
+    ignore_changes = [user_data]
+  }
+
+  user_data = <<-EOT
+    #cloud-config
+    ssh_pwauth: false
+    users:
+    # As in seagl-ansible/roles/users/tasks/main.yml
+    - name: "gh-actions"
+      gecos: "Privileged User"
+      sudo: "ALL=(ALL) NOPASSWD:ALL"
+      shell: "/bin/bash"
+      lock_passwd: true
+      create_groups: false
+      uid: 1027
+      ssh_authorized_keys:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwA5jA6XgkCiaEGzFzp6EiEIzy73UQuQ3fYZLf8HA/l"
+  EOT
 }
 
 resource "aws_route53_record" "dns-a" {
