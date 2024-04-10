@@ -149,3 +149,13 @@ resource "aws_route53_record" "mailu-test-dmarc" {
     "v=DMARC1; p=reject; rua=mailto:dmarc@mail-test.${var.zone_name}; ruf=mailto:dmarc@mail-test.${var.zone_name}; adkim=s; aspf=s"
   ]
 }
+
+resource "aws_route53_record" "mailu-server" {
+  zone_id = aws_route53_zone.apex.id
+  name    = "mail.${var.zone_name}"
+  type    = "CNAME"
+  ttl     = "300"
+  records = [
+    "mailu.host.${var.zone_name}"
+  ]
+}
