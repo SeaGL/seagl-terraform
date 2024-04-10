@@ -150,13 +150,12 @@ resource "aws_route53_record" "mailu-test-dmarc" {
   ]
 }
 
-resource "aws_route53_record" "Mailu server" {
+resource "aws_route53_record" "mailu-server" {
   zone_id = aws_route53_zone.apex.id
   name    = "mail.${var.zone_name}"
-  type    = "A"
-  # TODO increase all these Mailu TTLs
-  ttl = "300"
+  type    = "CNAME"
+  ttl     = "300"
   records = [
-    "140.211.167.187"
+    "mailu.host.${var.zone_name}"
   ]
 }
