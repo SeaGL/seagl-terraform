@@ -9,6 +9,7 @@ resource "aws_db_subnet_group" "pretalx" {
 
 resource "aws_db_instance" "pretalx" {
   identifier                  = "pretalx-prod"
+  db_name                     = "pretalx"
   allocated_storage           = 10
   max_allocated_storage       = 100
   engine                      = "postgres"
