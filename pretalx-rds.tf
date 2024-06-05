@@ -21,6 +21,7 @@ resource "aws_db_instance" "pretalx" {
   vpc_security_group_ids      = [aws_security_group.pretalx-rds-security-group.id]
   backup_retention_period     = 7
   ca_cert_identifier          = "rds-ca-rsa2048-g1"
+  deletion_protection         = true
 }
 
 # Pretalx DB SG
