@@ -8,6 +8,6 @@ resource "aws_instance" "dokku" {
   vpc_security_group_ids = ["sg-0e719b49f7d4d7f08"]
 
   tags = {
-    Name = "dokku.seagl.org"
+    Name = "dokku"
   }
 }
