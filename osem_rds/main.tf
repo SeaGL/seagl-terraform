@@ -30,7 +30,7 @@ resource "aws_db_instance" "osem" {
   engine                  = "mariadb"
   engine_version          = "10.6.16"
   instance_class          = "db.t4g.micro"
-  name                    = "osem"
+  db_name                 = "osem"
   username                = "osem"
   password                = aws_secretsmanager_secret_version.osem-db-pass-val.secret_string
   parameter_group_name    = "default.mariadb10.6"
