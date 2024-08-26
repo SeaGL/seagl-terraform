@@ -1,6 +1,6 @@
 resource "aws_instance" "dokku" {
   ami           = "ami-036d46416a34a611c"
-  instance_type = "t3.medium"
+  instance_type = "t3.small"
 
   associate_public_ip_address = true
   key_name                    = "AJ bootstrap key" # TODO
