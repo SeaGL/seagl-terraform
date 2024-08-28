@@ -45,7 +45,7 @@ resource "openstack_compute_instance_v2" "instance" {
   block_device {
     source_type           = "image"
     destination_type      = "volume"
-    uuid                  = "5e7b09b5-03f1-4f01-bc1b-41db2e1b09d1" # Ubuntu 22.04
+    uuid                  = "b36b5513-5f8e-4ee9-9b1e-3e8fb7a6ffff" # Ubuntu 22.04
     volume_size           = var.disk_size
     delete_on_termination = true
   }
@@ -55,7 +55,7 @@ resource "openstack_compute_instance_v2" "instance" {
   }
 
   lifecycle {
-    ignore_changes = [user_data]
+    ignore_changes = [user_data, block_device["uuid"]]
   }
 
   user_data = <<-EOT
