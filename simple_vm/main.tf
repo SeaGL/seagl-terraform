@@ -45,7 +45,7 @@ resource "openstack_compute_instance_v2" "instance" {
   block_device {
     source_type           = "image"
     destination_type      = "volume"
-    uuid                  = "b36b5513-5f8e-4ee9-9b1e-3e8fb7a6ffff" # Ubuntu 22.04
+    uuid                  = "9883486d-86b1-493c-9bc8-57f9ef78c8c4" # Ubuntu 24.04
     volume_size           = var.disk_size
     delete_on_termination = true
   }
