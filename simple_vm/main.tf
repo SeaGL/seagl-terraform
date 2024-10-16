@@ -37,7 +37,9 @@ resource "openstack_networking_secgroup_rule_v2" "tcp4-ingress" {
 resource "openstack_compute_instance_v2" "instance" {
   name        = var.name
   flavor_name = var.instance_type
-  key_pair    = "AJ OpenStack bootstrap" # TODO lol
+  # Looking for a key_pair?
+  # We set the bootstrap key in cloud-init below to one in GitHub Actions.
+  # Don't add a key_pair here; it's a no-op with the cloud-init config, and makes everything *really* confusing.
   security_groups = [
     openstack_networking_secgroup_v2.main-sg.name
   ]
@@ -55,7 +57,7 @@ resource "openstack_compute_instance_v2" "instance" {
   }
 
   lifecycle {
-    ignore_changes = [user_data, block_device["uuid"]]
+    ignore_changes = [user_data, block_device["uuid"], key_pair]
   }
 
   user_data = <<-EOT
