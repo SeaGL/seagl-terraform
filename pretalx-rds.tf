@@ -13,7 +13,7 @@ resource "aws_db_instance" "pretalx" {
   allocated_storage           = 10
   max_allocated_storage       = 100
   engine                      = "postgres"
-  engine_version              = "13.14"
+  engine_version              = "13.15"
   instance_class              = "db.t4g.micro"
   username                    = "pretalxadmin"
   manage_master_user_password = true
