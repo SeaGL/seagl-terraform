@@ -15,7 +15,7 @@ resource "aws_route53_record" "dns-a" {
   # TODO this doesn't really need to be an alias, and aliases cap TTL at 60
   # I'm doing it to avoid work plumbing IPs out of simple_vm
   alias {
-    name                   = "${var.year}.${var.dns_zone.name}"
+    name                   = module.vm.hostname
     zone_id                = var.dns_zone.id
     evaluate_target_health = false
   }
