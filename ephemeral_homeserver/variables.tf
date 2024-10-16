@@ -8,5 +8,6 @@ variable "dns_zone" {
   type = object({
     zone_id = string
     name    = string
+    id      = string
   })
 }
