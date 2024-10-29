@@ -20,3 +20,15 @@ resource "aws_route53_record" "dns-a" {
     evaluate_target_health = false
   }
 }
+
+# Supposedly, we have Element deactivated. But Traefik still tries to obtain ACME certs for it, as seen in the journald logs.
+# TODO: report this as a bug upstream
+resource "aws_route53_record" "element-cname" {
+  zone_id = var.dns_zone.zone_id
+  name    = "element.${var.year}.${var.dns_zone.name}"
+  type    = "CNAME"
+  ttl     = 300
+  records = [
+    "${var.year}.${var.dns_zone.name}"
+  ]
+}
