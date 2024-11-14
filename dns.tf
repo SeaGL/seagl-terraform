@@ -41,13 +41,3 @@ resource "aws_route53_record" "cloud-aaaa" {
     "2605:bc80:3010:104::8cd3:935"
   ]
 }
-
-resource "aws_route53_record" "meet-a" {
-  zone_id = module.production_env.zone_id
-  name    = "meet.seagl.org"
-  type    = "A"
-  ttl     = "300"
-  records = [
-    "161.35.238.112"
-  ]
-}
