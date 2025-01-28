@@ -18,6 +18,12 @@ variable "ports" {
   type        = list(number)
 }
 
+variable "port_ranges" {
+  description = "Port ranges that are open for inbound traffic"
+  type        = list(list(number))
+  default     = []
+}
+
 variable "image_uuid" {
   description = "UUID of the disk image"
   type        = string

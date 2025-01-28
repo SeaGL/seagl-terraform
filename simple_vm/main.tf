@@ -34,6 +34,17 @@ resource "openstack_networking_secgroup_rule_v2" "tcp4-ingress" {
   security_group_id = openstack_networking_secgroup_v2.main-sg.id
 }
 
+resource "openstack_networking_secgroup_rule_v2" "tcp4-ranged-ingress" {
+  for_each          = { for r in var.port_ranges : r[0] => r[1] }
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "tcp"
+  port_range_min    = each.key
+  port_range_max    = each.value
+  remote_ip_prefix  = "0.0.0.0/0"
+  security_group_id = openstack_networking_secgroup_v2.main-sg.id
+}
+
 resource "openstack_compute_instance_v2" "instance" {
   name        = var.name
   flavor_name = var.instance_type
