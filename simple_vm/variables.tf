@@ -36,3 +36,9 @@ variable "dns_zone" {
     name    = string
   })
 }
+
+variable "user_data" {
+  description = "User data to attach to the VM. Consumed by cloud-init on many Linux distributions."
+  type        = string
+  default     = ""
+}

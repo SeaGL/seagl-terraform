@@ -60,7 +60,7 @@ resource "openstack_compute_instance_v2" "instance" {
     ignore_changes = [user_data, block_device["uuid"], key_pair]
   }
 
-  user_data = <<-EOT
+  user_data = var.user_data != "" ? var.user_data : <<-EOT
     #cloud-config
     ssh_pwauth: false
     users:
