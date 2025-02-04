@@ -38,5 +38,5 @@ module "docker-cluster-vm" {
   image_uuid    = "0cbd4881-026e-4b2f-8883-2aca75af2ca1" # CoreOS 40
   disk_size     = 20
   dns_zone      = aws_route53_zone.apex
-  user_data     = ignition_config.coreos-bootstrap.rendered
+  user_data     = data.ignition_config.coreos-bootstrap.rendered
 }
