@@ -13,6 +13,10 @@ terraform {
       source  = "terraform-provider-openstack/openstack"
       version = "~> 1.50"
     }
+    ignition = {
+      source  = "community-terraform-providers/ignition"
+      version = "2.3.5"
+    }
   }
 }
 
@@ -34,4 +38,7 @@ provider "openstack" {
   tenant_name       = "SeaGL"
   project_domain_id = "default"
   user_domain_name  = "Default"
+}
+
+provider "ignition" {
 }
