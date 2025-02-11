@@ -61,7 +61,8 @@ data "ignition_config" "coreos-bootstrap" {
 module "docker-cluster-vm" {
   source        = "../simple_vm"
   name          = "docker-cluster"
-  ports         = [22, 443]
+  ports         = [22, 443, 2375]  # TODO lock down this control port to the OSUOSL network
+  port_ranges   = [[23000, 23050]] # https://github.com/nextcloud/docker-socket-proxy#example-when-operated-on-a-different-host
   instance_type = "m1.large"
   network       = "general_servers2"
   image_uuid    = "0cbd4881-026e-4b2f-8883-2aca75af2ca1" # CoreOS 40
