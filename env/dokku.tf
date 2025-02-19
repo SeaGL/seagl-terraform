@@ -1,7 +1,7 @@
 module "dokku-vm" {
   source        = "../simple_vm"
   name          = "dokku"
-  ports         = [22, 80, 443]
+  ports         = [22, 80, 443, 51820]
   instance_type = "m1.large"
   network       = "general_servers2"
   disk_size     = 40
