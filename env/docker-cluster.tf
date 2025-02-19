@@ -20,12 +20,41 @@ data "ignition_file" "gh-actions-sudoers" {
   }
 }
 
+# XXX this is probably better provided as a sysext, but those aren't fully baked upstream yet
+# So: https://docs.fedoraproject.org/en-US/fedora-coreos/os-extensions/
+# N.B. don't be surprised if it takes like, 4 boots for this to settle properly
+data "ignition_systemd_unit" "install-python-unit" {
+  name    = "rpm-ostree-install-python3.service"
+  enabled = true
+  content = <<EOT
+      [Unit]
+      Description=Install Python on first boot
+      Wants=network-online.target
+      After=network-online.target
+      Before=zincati.service
+      ConditionPathExists=!/var/lib/%N.stamp
+
+      [Service]
+      Type=oneshot
+      RemainAfterExit=yes
+      ExecStart=/usr/bin/rpm-ostree install -y --allow-inactive python3
+      ExecStart=/usr/bin/touch /var/lib/%N.stamp
+      ExecStart=/usr/bin/systemctl --no-block reboot
+
+      [Install]
+      WantedBy=multi-user.target
+    EOT
+}
+
 data "ignition_config" "coreos-bootstrap" {
   users = [
     data.ignition_user.gh-actions.rendered,
   ]
   files = [
     data.ignition_file.gh-actions-sudoers.rendered,
+  ]
+  systemd = [
+    data.ignition_systemd_unit.install-python-unit.rendered,
   ]
 }
 
