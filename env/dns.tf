@@ -62,7 +62,7 @@ resource "aws_route53_record" "dokku_wildcard" {
   type    = "CNAME"
   ttl     = "300"
   records = [
-    "dokku.${var.zone_name}"
+    module.dokku-vm.hostname
   ]
 }
 
