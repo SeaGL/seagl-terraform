@@ -41,3 +41,13 @@ resource "aws_route53_record" "cloud-aaaa" {
     "2605:bc80:3010:104::8cd3:935"
   ]
 }
+
+resource "aws_route53_record" "bsky-verification-txt" {
+  zone_id = module.production_env.zone_id
+  name    = "_atproto.seagl.org"
+  type    = "TXT"
+  ttl     = "300"
+  records = [
+    "did=did:plc:hogmnov6mwgz6mhw2h7763gm"
+  ]
+}
