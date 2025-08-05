@@ -51,3 +51,13 @@ resource "aws_route53_record" "bsky-verification-txt" {
     "did=did:plc:hogmnov6mwgz6mhw2h7763gm"
   ]
 }
+
+resource "aws_route53_record" "birdhouse-cname" {
+  zone_id = module.production_env.zone_id
+  name    = "birdhouse.seagl.org"
+  type    = "CNAME"
+  ttl     = "300"
+  records = [
+    "seagl.github.io."
+  ]
+}
