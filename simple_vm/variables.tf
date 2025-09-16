@@ -27,7 +27,7 @@ variable "port_ranges" {
 variable "image_uuid" {
   description = "UUID of the disk image"
   type        = string
-  default     = "9883486d-86b1-493c-9bc8-57f9ef78c8c4" # Ubuntu 24.04
+  default     = "688be3d2-7271-4f84-ac26-4cdf039f526b" # Ubuntu 24.04
 }
 
 variable "disk_size" {
