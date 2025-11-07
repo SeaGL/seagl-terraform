@@ -63,8 +63,9 @@ resource "aws_route53_record" "birdhouse-cname" {
 }
 
 resource "aws_route53_record" "jitsi-a" {
+  for_each = toset(["meet", "auth.meet", "focus.meet", "conference.meet"])
   zone_id = module.production_env.zone_id
-  name    = "meet.seagl.org"
+  name    = "${each.value}.seagl.org"
   type    = "A"
   ttl     = "300"
   records = [
