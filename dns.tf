@@ -61,3 +61,13 @@ resource "aws_route53_record" "birdhouse-cname" {
     "seagl.github.io."
   ]
 }
+
+resource "aws_route53_record" "jitsi-a" {
+  zone_id = module.production_env.zone_id
+  name    = "meet.seagl.org"
+  type    = "A"
+  ttl     = "300"
+  records = [
+    "142.93.82.178"
+  ]
+}
