@@ -61,14 +61,3 @@ resource "aws_route53_record" "birdhouse-cname" {
     "seagl.github.io."
   ]
 }
-
-resource "aws_route53_record" "jitsi-a" {
-  for_each = toset(["meet", "auth.meet", "focus.meet", "conference.meet"])
-  zone_id = module.production_env.zone_id
-  name    = "${each.value}.seagl.org"
-  type    = "A"
-  ttl     = "300"
-  records = [
-    "142.93.82.178"
-  ]
-}
