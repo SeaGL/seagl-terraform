@@ -61,3 +61,14 @@ resource "aws_route53_record" "birdhouse-cname" {
     "seagl.github.io."
   ]
 }
+
+resource "aws_route53_record" "attend-a" {
+  zone_id = module.production_env.zone_id
+  name    = "attend.seagl.org"
+  type    = "A"
+  alias {
+    evaluate_target_health = false
+    name                   = "d1wxq6aky88m0z.cloudfront.net"
+    zone_id                = "Z2FDTNDATAQYW2" # CloudFront global value
+  }
+}
