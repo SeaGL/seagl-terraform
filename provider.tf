@@ -6,7 +6,7 @@ terraform {
     }
     openstack = {
       source  = "terraform-provider-openstack/openstack"
-      version = "~> 1.50"
+      version = "~> 3.0"
     }
     ignition = {
       source  = "community-terraform-providers/ignition"
