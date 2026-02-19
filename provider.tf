@@ -4,11 +4,6 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 6.0"
     }
-    random = {
-      source  = "hashicorp/random"
-      version = "~> 3.4"
-    }
-    tls = {}
     openstack = {
       source  = "terraform-provider-openstack/openstack"
       version = "~> 1.50"
@@ -23,12 +18,6 @@ terraform {
 
 provider "aws" {
   region = "us-west-2"
-}
-
-provider "random" {
-}
-
-provider "tls" {
 }
 
 provider "openstack" {
