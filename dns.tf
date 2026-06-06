@@ -1,6 +1,6 @@
 resource "aws_route53_record" "route_53_cloud_txt" {
   zone_id = module.production_env.zone_id
-  name    = "cloud.seagl.org"
+  name    = "cloud.${module.production_env.zone_name}"
   type    = "TXT"
   ttl     = "300"
   records = [
@@ -24,7 +24,7 @@ resource "aws_route53_record" "email_dkim_hubspot_records" {
 
 resource "aws_route53_record" "cloud-a" {
   zone_id = module.production_env.zone_id
-  name    = "cloud.seagl.org"
+  name    = "cloud.${module.production_env.zone_name}"
   type    = "A"
   ttl     = "300"
   records = [
@@ -34,7 +34,7 @@ resource "aws_route53_record" "cloud-a" {
 
 resource "aws_route53_record" "cloud-aaaa" {
   zone_id = module.production_env.zone_id
-  name    = "cloud.seagl.org"
+  name    = "cloud.${module.production_env.zone_name}"
   type    = "AAAA"
   ttl     = "300"
   records = [
@@ -44,7 +44,7 @@ resource "aws_route53_record" "cloud-aaaa" {
 
 resource "aws_route53_record" "bsky-verification-txt" {
   zone_id = module.production_env.zone_id
-  name    = "_atproto.seagl.org"
+  name    = "_atproto.${module.production_env.zone_name}"
   type    = "TXT"
   ttl     = "300"
   records = [
@@ -54,30 +54,30 @@ resource "aws_route53_record" "bsky-verification-txt" {
 
 resource "aws_route53_record" "birdhouse-cname" {
   zone_id = module.production_env.zone_id
-  name    = "birdhouse.seagl.org"
+  name    = "birdhouse.${module.production_env.zone_name}"
   type    = "CNAME"
   ttl     = "300"
   records = [
-    "seagl.github.io."
+    "${module.production_env.github_domain}."
   ]
 }
 
 resource "aws_route53_record" "attend-cname" {
   zone_id = module.production_env.zone_id
-  name    = "attend.seagl.org"
+  name    = "attend.${module.production_env.zone_name}"
   type    = "CNAME"
   ttl     = "300"
   records = [
-    "seagl.github.io."
+    "${module.production_env.github_domain}."
   ]
 }
 
 resource "aws_route53_record" "sponsor-cname" {
   zone_id = module.production_env.zone_id
-  name    = "sponsor.seagl.org"
+  name    = "sponsor.${module.production_env.zone_name}"
   type    = "CNAME"
   ttl     = "300"
   records = [
-    "seagl.github.io."
+    "${module.production_env.github_domain}."
   ]
 }
