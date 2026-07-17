@@ -72,6 +72,16 @@ resource "aws_route53_record" "attend-cname" {
   ]
 }
 
+resource "aws_route53_record" "osem-cname" {
+  zone_id = module.production_env.zone_id
+  name    = "osem.seagl.org"
+  type    = "CNAME"
+  ttl     = "300"
+  records = [
+    "seagl.github.io."
+  ]
+}
+
 resource "aws_route53_record" "sponsor-cname" {
   zone_id = module.production_env.zone_id
   name    = "sponsor.seagl.org"
