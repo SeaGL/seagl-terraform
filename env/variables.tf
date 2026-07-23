@@ -3,6 +3,11 @@ variable "zone_name" {
   type        = string
 }
 
+variable "github_domain" {
+  description = "FQDN of GitHub-hosted website"
+  type        = string
+}
+
 variable "attach_to_zone" {
   description = "Route 53 zone object to attach (via NS record) the environment's zone to"
   default     = null
