@@ -1,3 +1,16 @@
+resource "aws_route53_record" "apex-a" {
+  zone_id = module.production_env.zone_id
+  name    = "seagl.org"
+  type    = "A"
+  ttl     = "300"
+  records = [
+    "185.199.108.153",
+    "185.199.109.153",
+    "185.199.110.153",
+    "185.199.111.153"
+  ]
+}
+
 resource "aws_route53_record" "route_53_cloud_txt" {
   zone_id = module.production_env.zone_id
   name    = "cloud.seagl.org"
