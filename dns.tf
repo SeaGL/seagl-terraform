@@ -11,6 +11,19 @@ resource "aws_route53_record" "apex-a" {
   ]
 }
 
+resource "aws_route53_record" "apex-aaaa" {
+  zone_id = module.production_env.zone_id
+  name    = "seagl.org"
+  type    = "AAAA"
+  ttl     = "300"
+  records = [
+    "2606:50c0:8000::153",
+    "2606:50c0:8001::153",
+    "2606:50c0:8002::153",
+    "2606:50c0:8003::153"
+  ]
+}
+
 resource "aws_route53_record" "route_53_cloud_txt" {
   zone_id = module.production_env.zone_id
   name    = "cloud.seagl.org"
