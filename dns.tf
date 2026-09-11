@@ -100,7 +100,7 @@ resource "aws_route53_record" "attend-cname" {
 
 resource "aws_route53_record" "osem-cname" {
   zone_id = module.production_env.zone_id
-  name    = "osem-static.seagl.org" # TODO: Remove `-static` after review
+  name    = "osem.seagl.org"
   type    = "CNAME"
   ttl     = "300"
   records = [
