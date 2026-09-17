@@ -24,6 +24,12 @@ variable "port_ranges" {
   default     = []
 }
 
+variable "udp_ports" {
+  description = "UDP ports open for inbound traffic"
+  type        = list(number)
+  default     = []
+}
+
 variable "image_uuid" {
   description = "UUID of the disk image"
   type        = string
