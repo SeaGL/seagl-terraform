@@ -26,6 +26,16 @@ resource "aws_route53_record" "apex-aaaa" {
   ]
 }
 
+resource "aws_route53_record" "google-postmaster-verification-txt" {
+  zone_id = module.production_env.zone_id
+  name    = "seagl.org"
+  type    = "TXT"
+  ttl     = "300"
+  records = [
+    "google-site-verification=SxvUWOHwGb7gq-O5o0-iEH3B3ujWo8R5Obm6LOU4nxo"
+  ]
+}
+
 resource "aws_route53_record" "route_53_cloud_txt" {
   zone_id = module.production_env.zone_id
   name    = "cloud.seagl.org"
