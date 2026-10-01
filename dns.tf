@@ -1,3 +1,5 @@
+# Put singleton DNS records here. For records duplicated across environments, see env/.
+
 resource "aws_route53_record" "apex-a" {
   zone_id = module.production_env.zone_id
   name    = "seagl.org"
