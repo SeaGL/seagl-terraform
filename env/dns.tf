@@ -156,6 +156,6 @@ resource "aws_route53_record" "mailu-server" {
   type    = "CNAME"
   ttl     = "300"
   records = [
-    "mailu.host.${var.zone_name}"
+    "seagl.github.io."
   ]
 }
